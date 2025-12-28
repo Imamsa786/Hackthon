@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>OSS Hackathon — Alice in Borderland</title>
+
+<!-- Tailwind -->
+<script src="https://cdn.tailwindcss.com"></script>
+
+<!-- Font Awesome -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css">
+
+<!-- Google Font -->
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
+
+<style>
+* { margin:0; padding:0; box-sizing:border-box; }
+body {
+  font-family: 'Orbitron', monospace;
+  background:rgb(0, 0, 0);
+  color:rgb(255, 255, 255);
+  animation: fadeIn 1.5s ease forwards;
+  opacity:0;
+}
+@keyframes fadeIn { to { opacity:1; } }
+
+/* Navbar */
+.navbar {
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:12px 20px;
+  background:#7f756e;
+  position:sticky;
+  top:0;
+  z-index:50;
+}
+.nav-links {
+  display:flex;
+  gap:15px;
+  list-style:none;
+}
+.nav-links a {
+  color:white;
+  text-decoration:none;
+}
+.menu-btn { display:none; }
+
+/* Mobile */
+@media(max-width:768px){
+  .nav-links{ display:none; flex-direction:column; }
+  .nav-links.show{ display:flex; }
+  .menu-btn{ display:block; }
+}
+
+/* Red strings */
+.strings span{
+  position:fixed;
+  top:-120%;
+  width:2px;
+  height:160%;
+  background:linear-gradient(to bottom,transparent,red,transparent);
+  animation:fall 6s linear infinite;
+  opacity:.5;
+}
+@keyframes fall{
+  from{transform:translateY(-120%)}
+  to{transform:translateY(120%)}
+}
+
+/* Glow */
+.neon-glow{
+  text-shadow:0 0 10px red,0 0 20px red;
+}
+</style>
+</head>
+
+<body>
+
+<!-- RED STRINGS -->
+<div class="strings">
+  <span style="left:10%;animation-delay:2s"></span>
+  <span style="left:30%;animation-delay:3s"></span>
+  <span style="left:50%;animation-delay:4s"></span>
+  <span style="left:70%;animation-delay:2.5s"></span>
+  <span style="left:90%;animation-delay:3.5s"></span>
+</div>
+
+<!-- NAVBAR (FROM YOUR CODE) -->
+<nav class="navbar">
+  <div class="flex gap-3 items-center">
+    <img src="https://www.bing.com/th/id/OIP.dH9xGc9McUDoY0WGzYGl5gHaHa?w=160&h=211" alt="KARE OSS Logo" class="w-12">
+    <img src="https://d1fdloi71mui9q.cloudfront.net/r5TKb0TBT0ap4qkEvU5T_xqs3cm6YoU46N7IY" alt="Open Source Society Logo" class="w-12">
+  </div>
+
+  <div>
+    <h1 class="text-lg text-cyan-400 font-bold">KARE OPEN SOURCE SOCIETY</h1>
+    <p class="text-sm text-gray-200">Debug Engineers Liberally</p>
+  </div>
+
+  <i class="fa-solid fa-bars menu-btn"></i>
+  <ul class="nav-links">
+    <li><a href="#home">Home</a></li>
+    <li><a href="#agenda">Agenda</a></li>
+    <li><a href="register.html">Register</a></li>
+  </ul>
+</nav>
+
+<!-- HOME / HERO (FROM YOUR CODE – SIMPLIFIED) -->
+<section id="home" class="relative z-10 max-w-5xl mx-auto mt-16 p-10 text-center border border-red-600 bg-zinc-950">
+  <h1 class="text-5xl mb-6 neon-glow">Welcome to KARE OSS</h1>
+  <p class="text-lg mb-6">
+    Gateway to <b>Open-Source Collaboration</b> and Innovation
+  </p>
+
+  <div class="flex justify-center gap-6 mt-8">
+    <a href="register.html"
+       class="bg-red-600 px-8 py-4 font-bold hover:bg-white hover:text-red-600">
+      Register Hackathon
+    </a>
+
+    <a href="https://chat.whatsapp.com/JOk6JwkslvC6lI4d4ZuZmd"
+       class="bg-green-500 px-8 py-4 font-bold hover:bg-white hover:text-black">
+      Join WhatsApp
+    </a>
+  </div>
+</section>
+
+<!-- HACKATHON AGENDA (YOUR ORIGINAL CONTENT) -->
+<section id="agenda" class="relative z-10 max-w-3xl mx-auto mt-20 text-center">
+  <h1 class="text-6xl font-bold mb-4 neon-glow">OSS HACKATHON</h1>
+  <p class="text-red-500 italic mb-10">Alice in Borderland Edition</p>
+
+  <div class="bg-zinc-900 p-6 border border-red-600 mb-8">
+    <h2 class="text-2xl mb-4 border-b border-red-600 pb-2">GAME AGENDA</h2>
+    <ul class="text-left space-y-4 text-gray-300">
+      <li><span class="text-red-500">09:00</span> Visa Registration</li>
+      <li><span class="text-red-500">11:00</span> Rules Announcement</li>
+      <li><span class="text-red-500">14:00</span> Coding Round</li>
+      <li><span class="text-red-500">20:00</span> Results</li>
+    </ul>
+  </div>
+
+  <a href="register.html"
+     class="bg-red-600 px-12 py-4 text-2xl font-bold hover:bg-white hover:text-red-600">
+    REGISTER NOW
+  </a>
+</section>
+
+<script>
+const menuBtn=document.querySelector('.menu-btn');
+const navLinks=document.querySelector('.nav-links');
+menuBtn.onclick=()=>navLinks.classList.toggle('show');
+</script>
+<footer>
+  <div class="Contact" id="contact">
+    <h2>Contact Us<hr><hr></h2>
+    <p><strong>Email: </strong><i class="fa-solid fa-envelope"></i><a href="mailto:kareoss@klu.ac.in">kareoss@klu.ac.in</a></p>
+    <p><strong>Charter Official: </strong><a href="https://www.linkedin.com/in/r-raja-subramanian-a0076ab6/">Dr.R.Raja Subramanian</a>(Associate HoD/CSE & Associate Professor)</p>
+    <p><strong>Connect with us on Social media:</strong>
+      
+      <a href="https://www.linkedin.com/in/kare-oss"><i class="fa-brands fa-linkedin"></i></a>
+      <a href="https://www.instagram.com/kare_oss/"><i class="fa-brands fa-instagram"></i></a>
+      <a href=""><i class="fa-brands fa-whatsapp"></i></a>
+      <a href="https://x.com/OssKare"><i class="fa-brands fa-x-twitter"></i></a>
+    </p>
+  </div><br><br>
+
+    <p>&copy; Copyright 2026 KARE Open Source Society | Created by KARE OSS</p>
+  </footer>
+</body>
+</html>

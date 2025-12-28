@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<head>
+<meta charset="UTF-8">
+<title>OSS Admin Arena</title>
+<script src="https://cdn.tailwindcss.com"></script>
+
+<style>
+body {
+  background: black;
+  color: white;
+  font-family: monospace;
+  animation: fade 1.2s ease forwards;
+  opacity: 0;
+}
+@keyframes fade { to { opacity: 1; } }
+
+.card {
+  background: #0f0f0f;
+  border: 1px solid #7f1d1d;
+  box-shadow: 0 0 15px rgba(255,0,0,.2);
+}
+table th, table td {
+  border-bottom: 1px solid #222;
+}
+</style>
+</head>
+
+<body class="p-8">
+
+<h1 class="text-4xl text-red-600 font-bold mb-8">
+🎴 ADMIN DASHBOARD — OSS HACKATHON
+</h1>
+
+<!-- STATS -->
+<div class="grid md:grid-cols-4 gap-6 mb-10">
+  <div class="card p-6">
+    <p class="text-gray-400">Total Teams</p>
+    <h2 class="text-3xl text-red-500">42</h2>
+  </div>
+  <div class="card p-6">
+    <p class="text-gray-400">Total Players</p>
+    <h2 class="text-3xl text-red-500">156</h2>
+  </div>
+  <div class="card p-6">
+    <p class="text-gray-400">Revenue</p>
+    <h2 class="text-3xl text-red-500">₹39,000</h2>
+  </div>
+  <div class="card p-6">
+    <p class="text-gray-400">Game Status</p>
+    <h2 class="text-2xl text-green-500">ACTIVE</h2>
+  </div>
+</div>
+
+<!-- TABLE -->
+<div class="card p-6 overflow-x-auto">
+<h2 class="text-xl mb-4 text-red-500">Registered Teams</h2>
+
+<table class="w-full text-sm">
+<thead>
+<tr class="text-red-400">
+  <th class="text-left p-2">Team</th>
+  <th>Leader</th>
+  <th>Email</th>
+  <th>Members</th>
+  <th>Payment</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td class="p-2">Red Jokers</td>
+  <td>Arjun</td>
+  <td>arjun@klu.ac.in</td>
+  <td>4</td>
+  <td class="text-green-500">PAID</td>
+</tr>
+<!-- Dynamically fill later -->
+</tbody>
+</table>
+
+<button class="mt-6 bg-red-600 px-6 py-3 font-bold hover:bg-red-700">
+⬇ DOWNLOAD CSV
+</button>
+</div>
+
+</body>
+</html>

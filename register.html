@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+    <meta charset="UTF-8">
+    <meta   name="viewport" content="width=device-width, initial-scale=1.0">
+<head>
+  <title>OSS Visa Registration</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body { background:black; color:white; font-family:monospace }
+    input, select {
+      background:#111; border:1px solid #444; color:white; padding:10px
+    }
+    input:focus { border-color:red; outline:none }
+  </style>
+</head>
+
+<body class="p-6 md:p-10">
+<div class="max-w-4xl mx-auto border-2 border-red-600 p-6 bg-zinc-950">
+
+<h1 class="text-3xl font-bold text-red-600 mb-6">REGISTER FOR VISA</h1>
+
+<form id="visaForm" class="space-y-6">
+
+<input id="teamName" placeholder="TEAM NAME" required>
+
+<div id="membersContainer" class="space-y-4"></div>
+
+<button type="button"
+  onclick="addPlayer()"
+  class="bg-black border border-red-500 text-red-500 px-4 py-2 hover:bg-red-600 hover:text-white">
++ ADD PLAYER
+</button>
+
+<div class="border-t border-red-800 pt-6">
+  <p>Total Amount: <span id="feeLabel" class="text-red-500 font-bold">₹250</span></p>
+  <input id="utr" placeholder="UPI Transaction ID" required>
+</div>
+
+<button type="submit"
+  class="w-full bg-red-600 py-4 font-bold hover:bg-red-700">
+SUBMIT VISA
+</button>
+
+</form>
+</div>
+
+<!-- POPUP -->
+<div id="popup" class="hidden fixed inset-0 bg-black/90 flex items-center justify-center">
+  <div class="bg-zinc-900 border-4 border-red-600 p-10 text-center">
+    <h2 class="text-3xl text-red-600 mb-4">GAME OVER</h2>
+    <p>One or more players already exist.</p>
+    <button onclick="popup.classList.add('hidden')" class="mt-6 bg-white text-black px-6 py-2">
+      BACK
+    </button>
+  </div>
+</div>
+
+<script>
+const DEPTS = ["CSE","ECE","IT","MECH","CIVIL","ARC","EEE","BIOM"];
+const MAX = 4;
+let count = 0;
+
+function addPlayer() {
+  if (count >= MAX) return alert("Max 4 players only");
+  count++;
+
+  membersContainer.innerHTML += `
+  <div class="border border-zinc-800 p-4">
+    <p class="text-red-500 mb-2">
+      PLAYER ${count} ${count===1 ? "(LEADER)" : ""}
+    </p>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+      <input class="name" placeholder="NAME" required>
+      <input class="reg" placeholder="REGISTER NO" required>
+      <select class="dept">${DEPTS.map(d=>`<option>${d}</option>`).join("")}</select>
+      <select class="year">${[1,2,3,4,5].map(y=>`<option>Year ${y}</option>`).join("")}</select>
+      <input class="email col-span-full" placeholder="KLU MAIL ID" required>
+    </div>
+  </div>`;
+  updateFee();
+}
+
+function updateFee() {
+  feeLabel.innerText = `₹${count * 250}`;
+}
+
+// ADD LEADER BY DEFAULT
+addPlayer();
+
+visaForm.onsubmit = async e => {
+  e.preventDefault();
+
+  const emails = [...document.querySelectorAll(".email")].map(e=>e.value);
+  if (!emails.every(e=>e.endsWith("@klu.ac.in")))
+    return alert("Only @klu.ac.in allowed");
+
+  const payload = {
+    teamName: teamName.value,
+    leaderEmail: emails[0],
+    players: [...document.querySelectorAll(".reg")].map(r=>r.value),
+    amount: count * 250,
+    utr: utr.value
+  };
+
+  const res = await fetch("/register", {
+    method:"POST",
+    headers:{ "Content-Type":"application/json" },
+    body: JSON.stringify(payload)
+  });
+
+  const data = await res.json();
+  if (data.exists) popup.classList.remove("hidden");
+  else {
+    alert("VISA APPROVED. CHECK EMAIL.");
+    location.href="index.html";
+  }
+};
+</script>
+
+</body>
+</html>

@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<head>
+  <title>Entering the Arena...</title>
+
+  <!-- INTERNAL STYLES -->
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Orbitron', monospace;
+    }
+
+    body.intro {
+      height: 100vh;
+      background: radial-gradient(circle at center, #120000, #000000);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      color: white;
+    }
+
+    .intro-screen {
+      text-align: center;
+      animation: fadeIn 1.5s ease-in-out;
+    }
+
+    /* GLITCH TITLE */
+    .glitch {
+      font-size: 4rem;
+      color: #ff0000;
+      position: relative;
+      text-transform: uppercase;
+      letter-spacing: 6px;
+      text-shadow:
+        0 0 10px red,
+        0 0 25px red;
+      animation: flicker 2s infinite;
+    }
+
+    .glitch::before,
+    .glitch::after {
+      content: attr(data-text);
+      position: absolute;
+      left: 0;
+      width: 100%;
+      opacity: 0.8;
+    }
+
+    .glitch::before {
+      color: #ff0000;
+      clip-path: inset(0 0 50% 0);
+      animation: glitchTop 1.5s infinite;
+    }
+
+    .glitch::after {
+      color: #aa0000;
+      clip-path: inset(50% 0 0 0);
+      animation: glitchBottom 1.2s infinite;
+    }
+
+    .sub {
+      margin-top: 15px;
+      color: #ff4d4d;
+      letter-spacing: 4px;
+      font-size: 1.1rem;
+      opacity: 0.85;
+    }
+
+    /* COUNTDOWN */
+    #countdown {
+      margin-top: 50px;
+      font-size: 5rem;
+      color: #ffffff;
+      text-shadow: 0 0 20px red;
+      animation: pulse 1s infinite;
+    }
+
+    /* ANIMATIONS */
+    @keyframes fadeIn {
+      from { opacity: 0; transform: scale(0.9); }
+      to { opacity: 1; transform: scale(1); }
+    }
+
+    @keyframes flicker {
+      0%, 100% { opacity: 1; }
+      45% { opacity: 0.8; }
+      48% { opacity: 0.4; }
+      50% { opacity: 1; }
+    }
+
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.2); }
+      100% { transform: scale(1); }
+    }
+
+    @keyframes glitchTop {
+      0% { transform: translate(0); }
+      20% { transform: translate(-3px, -3px); }
+      40% { transform: translate(3px, 3px); }
+      60% { transform: translate(-2px, 2px); }
+      80% { transform: translate(2px, -2px); }
+      100% { transform: translate(0); }
+    }
+
+    @keyframes glitchBottom {
+      0% { transform: translate(0); }
+      20% { transform: translate(3px, 3px); }
+      40% { transform: translate(-3px, -3px); }
+      60% { transform: translate(2px, -2px); }
+      80% { transform: translate(-2px, 2px); }
+      100% { transform: translate(0); }
+    }
+
+    /* SCANLINE EFFECT */
+    body::after {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background: repeating-linear-gradient(
+        to bottom,
+        rgba(255,255,255,0.03),
+        rgba(255,255,255,0.03) 1px,
+        transparent 1px,
+        transparent 3px
+      );
+      pointer-events: none;
+    }
+  </style>
+</head>
+
+<body class="intro">
+
+  <div class="intro-screen">
+    <h1 class="glitch" data-text="OSS HACKATHON">OSS HACKATHON</h1>
+    <p class="sub">ALICE IN BORDERLAND</p>
+    <div id="countdown">5</div>
+  </div>
+
+  <!-- COUNTDOWN SCRIPT -->
+  <script>
+    let c = 5;
+    const el = document.getElementById("countdown");
+
+    const timer = setInterval(() => {
+      c--;
+      el.innerText = c;
+      if (c === 0) {
+        clearInterval(timer);
+        window.location.href = "index.html";
+      }
+    }, 1000);
+  </script>
+
+</body>
+</html>
